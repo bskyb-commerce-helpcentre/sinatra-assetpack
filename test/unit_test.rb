@@ -1,6 +1,7 @@
 require File.expand_path('../test_helper', __FILE__)
 
 class AppTest < UnitTest
+
   test '/js/hello.js (plain js)' do
     get '/js/hello.js'
     assert body == '$(function() { alert("Hello"); });'
@@ -64,6 +65,13 @@ class AppTest < UnitTest
     get '/index.html'
     assert body =~ /<script src='\/js\/hello.[0-9]+.js'><\/script>/
     assert body =~ /<script src='\/js\/hi.[0-9]+.js'><\/script>/
+  end
+
+  test "helpers where compression is enabled with setting compressed_env" do
+    app.set :compressed_env, true
+    get '/index.html'
+    assert body =~ /<script src='\/js\/app.[0-9]+.js'><\/script>/
+    app.set :compressed_env, false
   end
 
   test "helpers in production (compressed html thingie)" do

@@ -97,6 +97,14 @@ If you're on **production** mode, it serves a compressed version in the URLs you
 <script type='text/javascript' src='/js/app.589491.js'></script>
 ```
 
+It is sometimes useful to simulate production mode for asset compression in
+non-production environments.  To do this, simply set a compressed_env property
+with the value 'true' in the relevant environment config, e.g.:
+
+``` ruby
+set :compressed_env, true
+```
+
 Features
 --------
 
